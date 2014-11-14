@@ -58,10 +58,9 @@ public class Classroom_booking extends javax.swing.JFrame {
         return this.End_time;
     }
     public  void goToEdit(){
-        Edit e1=new Edit(this);
-    e1.main();
-    e1.setVisible(true);
-    this.setVisible(false);
+        Edit e1=new Edit(this); 
+        e1.setVisible(true);
+        this.setVisible(false);
     }
     /**
      * Creates new form Classroom_booking
@@ -295,7 +294,7 @@ public class Classroom_booking extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main() {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -322,7 +321,7 @@ public class Classroom_booking extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               // new Classroom_booking().setVisible(true);
+                new Classroom_booking().setVisible(true);
             }
         });
     }

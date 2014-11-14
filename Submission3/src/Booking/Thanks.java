@@ -63,9 +63,9 @@ public class Thanks extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("jLabel3");
+        jLabel3.setText("Driver name:");
 
-        jLabel4.setText("jLabel4");
+        jLabel4.setText("Driver number:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,7 +148,7 @@ public class Thanks extends javax.swing.JFrame {
         label(D_name,C_number);
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                //new Thanks().setVisible(true);
+                new Thanks().setVisible(true);
             }
         });
     }

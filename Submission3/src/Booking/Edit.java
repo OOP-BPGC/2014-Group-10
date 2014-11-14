@@ -21,6 +21,9 @@ public class Edit extends javax.swing.JFrame {
      * Creates new form Edit
      * @param cl
      */
+    public Edit(){
+        initComponents();
+    }
     public Edit(Classroom_booking cl){
         a="class_room";
         initComponents();
@@ -142,7 +145,7 @@ public class Edit extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public static void main() {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -170,6 +173,7 @@ public class Edit extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
+                new Edit().setVisible(true);
                
             }
         });
