@@ -20,6 +20,7 @@ public class Display extends JFrame {
    
      private int[] cabBookingNo=new int[10];
      private int[] classBookingNo=new int[10];
+	 private Object[] entries;
      public void goToBooking(){
         Booking b1=new Booking();
 
@@ -232,12 +233,11 @@ public class Display extends JFrame {
     public void addToCab() 
     {   
          MySQLAccess m=new MySQLAccess();
-         Object[][] entries;
          entries = m.displayAllCabBookings(User.NAME);
   //       m.displayAllClassRoomBookings(User.NAME);
          int i=0,j=0;
         // while(m.entries[i][j]!=null){
-               System.out.println(m.entries[0][0]);
+                System.out.println(m.entries[0][0]);
                 cabBookingNo[i]=(int) m.entries[i][0];
         
                 DefaultTableModel y =(DefaultTableModel)jTable2.getModel(); 

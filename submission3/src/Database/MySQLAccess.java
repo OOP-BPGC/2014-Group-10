@@ -20,7 +20,6 @@ public class MySQLAccess {
     public MySQLCabAccess CabDbase = new MySQLCabAccess();
     public MySQLClassRoomAccess ClassDbase = new MySQLClassRoomAccess();
     public Object entries[][]= new Object[10][10];
-    public Object entries1[][];
     
     public int BookingNo;
  
@@ -69,17 +68,18 @@ public class MySQLAccess {
   }
   
     
-    public void displayAllCabBookings(String username) {
+    public Object[][] displayAllCabBookings(String username) {
 	    try {
 	        resultSet = statement.executeQuery("select * from log where " +
 		    		"UserName = \"" + username + "\";");
 	        metaData = resultSet.getMetaData();
 	        int RowCount = getRowCount();
 		int ColumnCount = getColumnCount();
-	        displayResultSet(RowCount, ColumnCount);
+	        this.entries = displayResultSet(RowCount, ColumnCount);				
 	  } catch (Exception e){
     	    e.printStackTrace();
         }
+            return entries;
 }
 
     public Object[][] displayAllClassRoomBookings(String username) throws Exception {   
@@ -89,9 +89,9 @@ public class MySQLAccess {
 	        metaData = resultSet.getMetaData();
 	        int RowCount = getRowCount();
 			int ColumnCount = getColumnCount();
-	      this.entries1=displayResultSet(RowCount, ColumnCount);
+	      this.entries=displayResultSet(RowCount, ColumnCount);
 	
-        return this.entries1;
+        return this.entries;
 }
     
     public void getBookingStatus(int bookingNo) throws Exception {
@@ -112,11 +112,9 @@ public class MySQLAccess {
 		for (int i = 1; i <= RowCount; i++) {
 			for  (int j = 1; j <= ColumnCount ; j++){
 				this.entries[i-1][j-1] = getValueAt(resultSet, i, j);
-				
-                                System.out.println(this.entries[i-1][j-1]);
 			}
 		}
-        return this.entries;
+            return this.entries;
     }
 
     public int getRowCount() throws SQLException {
