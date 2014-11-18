@@ -16,6 +16,7 @@ public class MySQLAccess {
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
+    private ResultSet resultSet1 = null;
     private ResultSetMetaData metaData = null;
     public MySQLCabAccess CabDbase = new MySQLCabAccess();
     public MySQLClassRoomAccess ClassDbase = new MySQLClassRoomAccess();
@@ -54,8 +55,8 @@ public class MySQLAccess {
 		  	  	" UserName = \"" +username+ "\";");
 		    resultSet.first();
 		    String truePwd = resultSet.getString("pwd");
-		    System.out.println(truePwd);
-		    System.out.println(password);
+//		    System.out.println(truePwd);
+//		    System.out.println(password);
 		  // make changes in GUI from here or return true;
 		    if (password.equals(truePwd)) {
 		        return true;
@@ -75,7 +76,8 @@ public class MySQLAccess {
 	        metaData = resultSet.getMetaData();
 	        int RowCount = getRowCount();
 		int ColumnCount = getColumnCount();
-	        this.entries = displayResultSet(RowCount, ColumnCount);				
+                resultSet.first();
+		this.entries = displayResultSet(RowCount, ColumnCount);				
 	  } catch (Exception e){
     	    e.printStackTrace();
         }
@@ -88,10 +90,11 @@ public class MySQLAccess {
 		    		"UserName = \"" + username + "\";");
 	        metaData = resultSet.getMetaData();
 	        int RowCount = getRowCount();
-			int ColumnCount = getColumnCount();
-	      this.entries=displayResultSet(RowCount, ColumnCount);
+                int ColumnCount = getColumnCount();
+                resultSet.first();
+                entries=displayResultSet(RowCount, ColumnCount);
 	
-        return this.entries;
+         return this.entries;
 }
     
     public void getBookingStatus(int bookingNo) throws Exception {
@@ -107,11 +110,12 @@ public class MySQLAccess {
   }
     
     public Object[][] displayResultSet(int RowCount, int ColumnCount) throws Exception{
-//	    entries = new Object[10][10];
+	    entries = new Object[10][10];
 	    resultSet.first();
 		for (int i = 1; i <= RowCount; i++) {
 			for  (int j = 1; j <= ColumnCount ; j++){
 				this.entries[i-1][j-1] = getValueAt(resultSet, i, j);
+//                              System.out.println(entries[i-1][j-1]);
 			}
 		}
             return this.entries;
@@ -170,46 +174,67 @@ public class MySQLAccess {
     
     public class MySQLCabAccess {
     	
-	    public boolean sendCabDetails(Time StartingService, Time EndingService) throws Exception {
-		    String status = "Available";
+	    public Object[][] sendCabDetails(Time StartingService, Time EndingService) throws Exception {
+		    entries = new Object[10][10];
+                    String status = "Available";   
+                    resultSet = null;
 		    resultSet = statement.executeQuery("select * from cabs " +
 		  	  	"where status = \""+ status + "\";");
+                    resultSet1 = resultSet;
 		    metaData = resultSet.getMetaData();
-		    
-		    if (!resultSet.wasNull()) {
+		    System.out.println(resultSet);
+                    int i = 1;
+		    if (resultSet.first()) {
 		    	int ColumnCount = getColumnCount();
-		    	displayResultSet(1, ColumnCount);
-		    	return true;
+		    	entries = displayResultSet(1, ColumnCount);
+                        return entries;
 		    }
 		    else {
-			    resultSet = statement.executeQuery("select * from cabs " +
-			    		"where BookedTime == null");
+			    resultSet = statement.executeQuery("select * from cabs;");
 			    while (resultSet.next()) {
+ //                               System.out.println(resultSet.getTime("StartingBookedTime") + " " +
+ //                                       resultSet.getTime("EndingBookedTime")+ " " + 
+ //                                       EndingService + " " +
+ //                                       StartingService + " " +
+ //                                      resultSet.getTime("StartingBookedTime").compareTo(StartingService)+ " " +
+ //                                       resultSet.getTime("EndingBookedTime").compareTo(StartingService)+ " " +
+ //                                       resultSet.getTime("StartingBookedTime").compareTo(EndingService)+ " " +
+ //                                       resultSet.getTime("EndingBookedTime").compareTo(EndingService));
 			    	if ((resultSet.getTime("StartingBookedTime").compareTo(StartingService) < 0 
-					  	&& resultSet.getTime("EndingBookedTime").compareTo(StartingService) < 0) ||
+ 				  	&& resultSet.getTime("EndingBookedTime").compareTo(StartingService) < 0) ||
 					 		 (resultSet.getTime("StartingBookedTime").compareTo(EndingService) > 0 
 								 && resultSet.getTime("EndingBookedTime").compareTo(EndingService) > 0)) {
-			    		int ColumnCount = getColumnCount();
-				    	displayResultSet(1, ColumnCount);
-				    	return true;
-			    	}
+ //                                       System.out.println(ColumnCount);
+//                                        System.out.println(i);
+				    	entries[0][0] = resultSet.getString("CabDriver");
+                                        entries[0][1] = resultSet.getString("CabNo");
+                                        entries[0][2] = resultSet.getString("ContactNo");
+                                        System.out.println(entries[0][0] + ""+ entries[0][1] +""+ entries[0][2]);
+				    	return entries;
+                                }
+           
+                                else {
+                                    i++;    }
+			
 			    }
 		    }
-		    return false;
-//		  int rowCount = getRowCount(resultSet);
-		    
+ //		  int rowCount = getRowCount(resultSet);
+		    return entries;
             }
 
         public void updateDatabase(String username, String CabDriver, String CabNo, Time StartingService, Time EndingService)throws Exception {
-            preparedStatement = connect.prepareStatement("insert into log" +
-		  	  	"values (default, ?, ?, ?, ?, ?)");
+                    preparedStatement = connect.prepareStatement("insert into log values(7,?,?,?,?,?,?);");
+//            preparedStatement = connect.prepareStatement("insert into log" +
+//		  	  	"values (4, \"" + username + "\", " + CabDriver + "\", " + CabNo + "\", " + StartingService
+//                  + "\", " + EndingService + "\", " + "Vasco");
 		    preparedStatement.setString(1, username);
 		    preparedStatement.setString(2, CabDriver);
 		    preparedStatement.setString(3, CabNo);
 		    preparedStatement.setTime(4, StartingService);
 		    preparedStatement.setTime(5, EndingService);
+                    preparedStatement.setString(6, "Vasco");
 		    preparedStatement.executeUpdate();
-		    resultSet = statement.executeQuery("select BookingNo from log where UserName = " + username);
+                    resultSet = statement.executeQuery("select BookingNo from log where UserName = " + username);
 		    BookingNo = resultSet.getInt("BookingNo");
         }
 	}
@@ -220,12 +245,12 @@ public class MySQLAccess {
 	    	MySQLAccess SQLAccess = new MySQLAccess();
 //	    	boolean a = SQLAccess.validateUser("Ram", "Ramayana");
 //	    	System.out.println(a);
-	    	SQLAccess.displayAllCabBookings("Ram");
+//	    	SQLAccess.displayAllCabBookings("Ram");
 //	    	SQLAccess.getBookingStatus(2);
-//	    	Time t1 = new Time(1);
-//	    	Time t2 = new Time(3);
+	    	Time t1 = new Time(16, 30, 0);
+	    	Time t2 = new Time(20, 0, 0);
 //	    	SQLAccess.CabDbase.sendCabDetails(t1, t2);
-                
+                SQLAccess.CabDbase.updateDatabase("Ram", "Ramesh", "GA4756", t1, t2);
                 
 	   }
   }

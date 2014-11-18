@@ -232,7 +232,7 @@ public class Cab_Details extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cab_Details().setVisible(true);
+               // new Cab_Details().setVisible(true);
             }
         });
     }

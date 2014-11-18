@@ -21,9 +21,6 @@ public class Edit extends javax.swing.JFrame {
      * Creates new form Edit
      * @param cl
      */
-    public Edit(){
-        initComponents();
-    }
     public Edit(Classroom_booking cl){
         a="class_room";
         initComponents();
@@ -173,7 +170,6 @@ public class Edit extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Edit().setVisible(true);
                
             }
         });

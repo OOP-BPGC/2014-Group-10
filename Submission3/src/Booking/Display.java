@@ -20,17 +20,17 @@ public class Display extends JFrame {
    
      private int[] cabBookingNo=new int[10];
      private int[] classBookingNo=new int[10];
-	 private Object[] entries;
-    public void goToBooking(){
-        Booking b1=new Booking();
-        b1.setVisible(true);
-        this.setVisible(false);
+     private Object[][] entries;
+     public void goToBooking(){
+       Booking b1=new Booking();
+       b1.setVisible(true);
+       this.setVisible(false);
     }
          /**
      * Creates new form Display1
      * @param u1
      */
-    public Display() {
+        public Display() {
         initComponents();
        
     }
@@ -136,7 +136,7 @@ public class Display extends JFrame {
             }
         });
 
-        jButton7.setText("Proceed to Booking");
+        jButton7.setText("Go to Booking");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -163,7 +163,7 @@ public class Display extends JFrame {
                             .addComponent(jButton3)
                             .addComponent(jButton4)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(167, 167, 167)
+                        .addGap(187, 187, 187)
                         .addComponent(jButton7)))
                 .addGap(0, 40, Short.MAX_VALUE))
         );
@@ -190,9 +190,9 @@ public class Display extends JFrame {
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jButton7)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addGap(33, 33, 33))
         );
 
         pack();
@@ -224,8 +224,8 @@ public class Display extends JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-       this.goToBooking();
-       this.setVisible(false);
+        Booking b1=new Booking();
+        b1.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
   /*   public void addToClass() 
     {   
@@ -252,20 +252,21 @@ public class Display extends JFrame {
     public void addToCab() 
     {   
          MySQLAccess m=new MySQLAccess();
+         System.out.println(User.NAME);
          entries = m.displayAllCabBookings(User.NAME);
   //       m.displayAllClassRoomBookings(User.NAME);
          int i=0,j=0;
-        // while(m.entries[i][j]!=null){
-                System.out.println(m.entries[0][0]);
-                cabBookingNo[i]=(int) m.entries[i][0];
+         while(this.entries[i][j]!=null){
+                System.out.println(this.entries[0][0]);
+                cabBookingNo[i]=(int) this.entries[i][0];
         
-                DefaultTableModel y =(DefaultTableModel)jTable2.getModel(); 
+                DefaultTableModel y =(DefaultTableModel)jTable1.getModel(); 
                 Vector rowData = new Vector(); 
-                rowData.add(m.entries[i][1]);
-                rowData.add(m.entries[i][3]); 
-                rowData.add(m.entries[i][4]); 
-                rowData.add(m.entries[i][5]);
-                rowData.add(m.entries[i][6]); 
+                rowData.add(this.entries[i][1]);
+                rowData.add(this.entries[i][3]); 
+                rowData.add(this.entries[i][4]); 
+                rowData.add(this.entries[i][5]);
+                rowData.add(this.entries[i][6]); 
                 
 
                 jButton1.setVisible(false);
@@ -273,7 +274,7 @@ public class Display extends JFrame {
                 i+=1;
                 j+=1;
                 
-        
+         }
     
     } 
     
@@ -314,9 +315,9 @@ public class Display extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
-           
+          
             public void run() {
-                Display d = new Display();
+                Display d=new Display();
                 d.setVisible(true);
                 d.addToCab();
                // d.addToClass();

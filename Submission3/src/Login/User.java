@@ -150,10 +150,10 @@ public class User extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     public void goToDisplay(){
-        //Display.main();
-        Display d1=new Display();
-        d1.addToCab();
-        d1.setVisible(true);
+        Display d = new Display();
+        d.setVisible(true);
+        d.addToCab();
+       // Display.main();
         this.setVisible(false);
         
     }
@@ -172,25 +172,23 @@ public class User extends javax.swing.JFrame {
      // User u1=new User();
       this.setUsername(jTextField1.getText());
       this.setPassword(jPasswordField1.getText()); 
-      
-     //MySQLAccess m=new MySQLAccess();
-     // if(m.validateUser(this.getUsername(),this.getPassword())){
+      NAME=jTextField1.getText();
+      MySQLAccess m=new MySQLAccess();
+      if(m.validateUser(this.getUsername(),this.getPassword())){
               this.goToDisplay();
-             // auth="yes";
-    //  }
-    //  else{*/
-         // JOptionPane.showMessageDialog(null, "Incorect username or password ");
+              auth="yes";
       }
-      // }
+      else{
+          JOptionPane.showMessageDialog(null, "Incorect username or password ");
+      }
+       }
     }//GEN-LAST:event_jButton1ActionPerformed
-    public void goToGuest(){
-       Guest G1=new Guest();
-       G1.setVisible(true);
-    }
+    
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
      
-      this.goToGuest();
+       Guest G1=new Guest();
+       G1.setVisible(true);
        this.setVisible(false);
        
      
@@ -230,8 +228,8 @@ public class User extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-             
-                new User().setVisible(true);
+              //  new User().setVisible(true);
+                
             }
         });
     }
