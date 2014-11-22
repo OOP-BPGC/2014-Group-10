@@ -1,0 +1,69 @@
+Login:
+
+input:
+Username
+Password					
+
+output:
+invalid username or password
+displays approved bookings
+						Book:
+
+input:
+button click--Book a cab
+button click--Book a classroom
+
+output:
+displays cab detail filling form
+displays classroom details filling form
+
+Enter Details for cab:									
+input:
+Place
+Departure time
+Arrival time
+date
+
+output:
+Sorry cab not available
+Go to edit option
+
+Enter Details for classroom:
+
+input:
+purpose
+requirements
+Classroom
+Start time
+End time
+date
+click next
+
+output:
+Sorry class already booked
+goes to edit frame
+
+cancel:
+
+input:
+click cancel button
+
+output:
+refreshed frame
+
+confirm Booking:
+
+input:
+click submit
+
+output:
+Your request for booking the given room is submitted					
+Approve:
+
+input:
+click approve button
+
+output:
+refreshed frame with the respective request arppoved
+
+											

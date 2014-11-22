@@ -1,0 +1,15 @@
+a) Positives of your group-
+
+   -Every member of the group took initiative and fruitful brainstorming session took place for every level of submission. 
+   -The group had a good mix of people which made the allotment and execution of work easy. 
+   -Members were responsive and helpful to each other.	
+
+b) Negatives of your group-
+
+   -Too much deliberation led to delays
+   -Took us time to get used to GitHub
+
+c) What would you do differently next time?
+
+   -We would try to make the application deployable (i.e.web-application as it is the most accesible interface for users)
+   -We would like to communicate better next time
