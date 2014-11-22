@@ -127,8 +127,7 @@ public class Guest extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     public void goToBooking(){
         
-        Booking b1=new Booking();
-
+       Booking b1=new Booking();
        b1.setVisible(true);
        this.setVisible(false);
     }
@@ -143,11 +142,12 @@ public class Guest extends javax.swing.JFrame {
          
         else{        
        
-        this.goToBooking();
+        
         this.setname(jTextField1.getText());
         this.setnumber(jTextField2.getText());
         NAME=this.getname();
         C_NO=this.getContact_no();
+        this.goToBooking();
         this.setVisible(false);
                 }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -159,7 +159,7 @@ public class Guest extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main() {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

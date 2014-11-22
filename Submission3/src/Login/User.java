@@ -150,7 +150,10 @@ public class User extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     public void goToDisplay(){
-        Display.main();
+        Display d = new Display();
+        d.setVisible(true);
+        d.addToCab();
+       // Display.main();
         this.setVisible(false);
         
     }
@@ -169,7 +172,7 @@ public class User extends javax.swing.JFrame {
      // User u1=new User();
       this.setUsername(jTextField1.getText());
       this.setPassword(jPasswordField1.getText()); 
-      
+      NAME=jTextField1.getText();
       MySQLAccess m=new MySQLAccess();
       if(m.validateUser(this.getUsername(),this.getPassword())){
               this.goToDisplay();

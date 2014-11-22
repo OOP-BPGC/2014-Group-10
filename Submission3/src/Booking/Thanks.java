@@ -63,9 +63,9 @@ public class Thanks extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("jLabel3");
+        jLabel3.setText("CabDriver name:");
 
-        jLabel4.setText("jLabel4");
+        jLabel4.setText("CabDriver number:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
